@@ -7,4 +7,4 @@ All commits will be tied to lectures
 * Lecture 1 - Intro
 * Lecture 2 - Overview
 * Lecture 3 - Game Design Document
-* Lecture 4 - Setting up git repo
+* Lecture 4 - Setting up Github repo
