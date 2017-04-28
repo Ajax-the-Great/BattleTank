@@ -2,6 +2,10 @@
 .vs/
 *.VC.db
 
+#Starter content
+Content/StarterContent
+
+
 # Compiled Object files
 *.slo
 *.lo
