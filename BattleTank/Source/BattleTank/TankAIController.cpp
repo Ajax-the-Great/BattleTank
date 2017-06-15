@@ -13,7 +13,7 @@ ATank* ATankAIController::GetPlayerTank() const
 {
 	APlayerController* pPlayerController = GetWorld()->GetFirstPlayerController();
 	if (pPlayerController)
-		return dynamic_cast<ATank*>(pPlayerController->GetControlledPawn());
+		return dynamic_cast<ATank*>(pPlayerController->GetPawn());
 	else
 		return nullptr;
 }
@@ -43,4 +43,14 @@ void ATankAIController::BeginPlay()
 	}
 }
 
-
+// Called every frame
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	ATank* pPlayerTank = GetPlayerTank();
+	if (!pPlayerTank)
+		return;
+	auto PlayerTankLocation = pPlayerTank->GetActorLocation();
+	GetControlledTank()->AimAt(PlayerTankLocation);
+	// Fire if ready
+}
