@@ -2,7 +2,7 @@
 
 #include "BattleTank.h"
 #include "Tank.h"
-
+#include "BattleTank.h"
 
 // Sets default values
 ATank::ATank()
@@ -38,7 +38,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void ATank::SetBarrel(UStaticMeshComponent* BarrelToSet)
+void ATank::SetBarrel(UTankBarrel* BarrelToSet)
 {
 	TankAimingComponent->SetBarrel(BarrelToSet);
 };

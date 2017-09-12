@@ -90,7 +90,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector WorldCameraPosition
 		//UE_LOG(LogTemp, Warning, TEXT("HitResult is - %s"), *HitActor->GetName());
 
 		OutHitLocation = HitResult.Location;
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation is - %s"), *OutHitLocation.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("HitLocation is - %s"), *OutHitLocation.ToString());
 		return true;
 	}
 	else
