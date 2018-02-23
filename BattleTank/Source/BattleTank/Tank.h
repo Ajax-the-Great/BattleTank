@@ -7,6 +7,7 @@
 #include "Tank.generated.h" // Put your includes above
 
 class UTankBarrel;
+class UTankTurret;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -23,17 +24,21 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrel(UTankBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurret(UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Action)
+	void Fire();
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 	
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000.f; // 1000m/s
+	float LaunchSpeed = 10000000.f; // 1000m/s
 };

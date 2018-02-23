@@ -63,10 +63,10 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 		//float angle = FMath::RadiansToDegrees(rads);
 		//UE_LOG(LogTemp, Warning, TEXT("Angle \t%f\t%f\t%f"), dp, rads, angle);
 
-		GetLookVectorHitLocation(WorldCameraPosition, LookDirection, OutHitLocation);
+		return GetLookVectorHitLocation(WorldCameraPosition, LookDirection, OutHitLocation);
 	}
 	
-	return true;
+	return false;
 }
 
 bool ATankPlayerController::GetLookVectorHitLocation(FVector WorldCameraPosition, FVector LookDirection, FVector& OutHitLocation) const
@@ -77,6 +77,8 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector WorldCameraPosition
 		return false;
 	FVector Start = WorldCameraPosition;
 	FVector End = Start + LookDirection*LineTraceRange;
+	FColor color(255, 0, 0);
+	DrawDebugLine(GetWorld(), Start, End, color, false, 0.f, 0, 10.f);
 	FCollisionQueryParams collisionQueryParams("", false, ControlledTank);
 	//UE_LOG(LogTemp, Warning, TEXT("We are - %s"), *ControlledTank->GetName());
 	if (GetWorld()->LineTraceSingleByChannel(
@@ -87,10 +89,10 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector WorldCameraPosition
 		collisionQueryParams))
 	{
 		AActor* HitActor = HitResult.GetActor();
-		//UE_LOG(LogTemp, Warning, TEXT("HitResult is - %s"), *HitActor->GetName());
+		UE_LOG(LogTemp, Warning, TEXT("HitResult is - %s"), *HitActor->GetName());
 
 		OutHitLocation = HitResult.Location;
-		//UE_LOG(LogTemp, Warning, TEXT("HitLocation is - %s"), *OutHitLocation.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("HitLocation is - %s"), *OutHitLocation.ToString());
 		return true;
 	}
 	else

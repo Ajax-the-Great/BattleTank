@@ -5,10 +5,7 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
-class UTankBarrel;
-class UTankTurret;
 
-// Hold's and move's barrel
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
@@ -18,14 +15,16 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
+public:	
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	void AimAt(FVector LocationToAim, float LaunchSpeed);
-	void SetBarrel(UTankBarrel* BarrelToSet);
-	void SetTurret(UTankTurret* TurretToSet);
-	
+	void SetBarrel(UStaticMeshComponent* BarrelToSet);
 private:
-	void MoveBarrelTowards(FVector AimDirection);
-	void MoveTurretTowards(FVector AimDirection);
-private:
-	UTankBarrel* Barrel = nullptr;
-	UTankTurret* Turret = nullptr;
+	UStaticMeshComponent* Barrel = nullptr;
 };

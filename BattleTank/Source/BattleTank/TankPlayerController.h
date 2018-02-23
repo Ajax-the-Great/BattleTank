@@ -35,10 +35,10 @@ private:
 	float CrossHairXRatio = 0.5f;
 
 	UPROPERTY(EditAnywhere)
-	float CrossHairYRatio = 0.5f;
+	float CrossHairYRatio = 0.3333f;
 
 	UPROPERTY(EditAnywhere)
-	float LineTraceRange = 1000000.f;
+	float LineTraceRange = 1000000000.f;
 
 	FVector DoStuff(float percentX, float percentY) const;
 };
