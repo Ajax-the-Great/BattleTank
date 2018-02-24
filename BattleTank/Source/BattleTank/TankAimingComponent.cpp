@@ -41,8 +41,8 @@ void UTankAimingComponent::AimAt(FVector LocationToAim, float LaunchSpeed)
 	if (bCalcSuccess)
 	{
 		
-		FColor color(255, 0, 0);
-		DrawDebugLine(GetWorld(), StartLocation, LaunchVelocity, color, false, 0.f, 0, 10.f);
+		//FColor color(255, 0, 0);
+		//DrawDebugLine(GetWorld(), StartLocation, LaunchVelocity, color, false, 0.f, 0, 10.f);
 		UE_LOG(LogTemp, Warning, TEXT("LaunchVelocity %s"), *LaunchVelocity.ToString());
 
 		auto AimDirection = LaunchVelocity.GetSafeNormal();

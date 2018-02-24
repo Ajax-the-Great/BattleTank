@@ -9,7 +9,8 @@ AProjectile::AProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	projectileMovementComponent = CreateDefaultSubobject<UTankProjectileMovementComponent>(FName("Movement_component"));
+	projectileMovementComponent->bAutoActivate = false;
 }
 
 // Called when the game starts or when spawned
@@ -26,3 +27,9 @@ void AProjectile::Tick(float DeltaTime)
 
 }
 
+void AProjectile::LaunchProjectile(float fSpeed)
+{
+	UE_LOG(LogTemp, Error, TEXT("%f: FIRE!!!"), fSpeed);
+	projectileMovementComponent->SetVelocityInLocalSpace(FVector::ForwardVector*fSpeed); // Moves forward. In ATank::Fire we've created it with direction same as barrel.
+	projectileMovementComponent->Activate();
+};

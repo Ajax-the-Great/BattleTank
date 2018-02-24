@@ -38,7 +38,7 @@ FVector ATankPlayerController::DoStuff(float percentX, float percentY) const
 	GetLookDirection(ScreenLocation, WorldCameraPosition, LookDirection);
 	UE_LOG(LogTemp, Warning, TEXT("%f\t%f\t%s,\t%s"), percentX, percentY, *WorldCameraPosition.ToString(), *LookDirection.ToString());
 	FVector endLine = WorldCameraPosition + LookDirection*30000.f;
-	DrawDebugLine(GetWorld(), WorldCameraPosition, endLine, color, false, 0.f, 0, 10.f);
+	//DrawDebugLine(GetWorld(), WorldCameraPosition, endLine, color, false, 0.f, 0, 10.f);
 	return LookDirection;
 };
 
@@ -77,8 +77,8 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector WorldCameraPosition
 		return false;
 	FVector Start = WorldCameraPosition;
 	FVector End = Start + LookDirection*LineTraceRange;
-	FColor color(255, 0, 0);
-	DrawDebugLine(GetWorld(), Start, End, color, false, 0.f, 0, 10.f);
+	//FColor color(255, 0, 0);
+	//DrawDebugLine(GetWorld(), Start, End, color, false, 0.f, 0, 10.f);
 	FCollisionQueryParams collisionQueryParams("", false, ControlledTank);
 	//UE_LOG(LogTemp, Warning, TEXT("We are - %s"), *ControlledTank->GetName());
 	if (GetWorld()->LineTraceSingleByChannel(
