@@ -31,13 +31,13 @@ private:
 	// Length of vector from player view point
 	float fReach = 100.f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXRatio = 0.5f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairYRatio = 0.3333f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000000.f;
 
 	FVector DoStuff(float percentX, float percentY) const;

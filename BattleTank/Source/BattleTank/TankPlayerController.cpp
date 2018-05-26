@@ -117,6 +117,7 @@ void ATankPlayerController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("NO PLAYER TANK"));
 	}
+	PrimaryActorTick.bCanEverTick = true;
 }
 
 // Called every frame

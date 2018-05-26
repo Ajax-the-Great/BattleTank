@@ -21,7 +21,9 @@ void UTankAimingComponent::AimAt(FVector LocationToAim, float LaunchSpeed)
 		return;
 	FVector LaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation("ProjectileStart");
-
+	UE_LOG(LogTemp, Warning, TEXT("StartLocation is - %s"), *StartLocation.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("LocationToAim is - %s"), *LocationToAim.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("LaunchSpeed is - %f"), LaunchSpeed);
 	// Calc LaunchVelocity
 	FCollisionResponseParams ResponseParam(ECollisionResponse::ECR_Block);
 	bool bCalcSuccess = UGameplayStatics::SuggestProjectileVelocity(
@@ -32,9 +34,9 @@ void UTankAimingComponent::AimAt(FVector LocationToAim, float LaunchSpeed)
 		LaunchSpeed,
 		false,
 		0,
-		0/*,
-		ESuggestProjVelocityTraceOption::TraceFullPath,
-		ResponseParam,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace // Paramater must be present to prevent bug
+		/*ResponseParam,
 		TArray <AActor *>(),
 		false*/
 	);
@@ -58,18 +60,23 @@ void UTankAimingComponent::AimAt(FVector LocationToAim, float LaunchSpeed)
 	{
 		auto Time = GetWorld()->GetTimeSeconds();
 		// Move the barrel frame by frame to value based on max elevation speed and frame rate
-		UE_LOG(LogTemp, Warning, TEXT("%f: No solution"));
+		UE_LOG(LogTemp, Warning, TEXT("No solution"));
 	}
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
+	if (!Turret)
+		return;
+	if (!Barrel)
+		return;
 	// Work-out difference between current barrel rotation and aim direction
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	UE_LOG(LogTemp, Warning, TEXT("BarrelRotator %s"), *BarrelRotator.ToString());
 	auto AimRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimRotator - BarrelRotator;
-	UE_LOG(LogTemp, Warning, TEXT("Aim  rotator %s "), *AimRotator.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("Aim rotator %s "), *AimRotator.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("DeltaRotator rotator %s "), *DeltaRotator.ToString());
 	//if (AimRotator.Pitch < 0)
 		//return; // It's meaningless to aim with negative pitch - we cant't move burrel down. But we can ruine yaw, trying to aim on something we can't rich.
 	Barrel->Elevate(DeltaRotator.Pitch); 
